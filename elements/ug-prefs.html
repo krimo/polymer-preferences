@@ -1,0 +1,113 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="ug-prefs">
+<template>
+	<style>
+		li {
+			margin: 2em 0;
+		}
+
+		paper-radio-button::shadow #ink[checked] {
+			color: #ee145b;
+		}
+
+		paper-radio-button::shadow #onRadio {
+			background-color: #ee145b;
+		}
+
+		paper-radio-button::shadow #ink {
+			color: #b5b5b5;
+		}
+
+		paper-radio-button::shadow #offRadio {
+			border-color: #b5b5b5;
+		}
+	</style>
+	<h1>Hello, there.</h1>
+	<i>Your preferences are as follows :</i>
+	
+	<ul class="preflist" id="prefList">
+		<template repeat="{{ pref, prefIndex in ugprefs | keys }}">
+			<li class="pref">
+				<paper-radio-button toggles label="{{ pref }}" id="ug-button-{{ prefIndex }}"></paper-radio-button>
+			</li>
+		</template>
+	</ul>
+
+	<content></content>
+
+</template> 
+<script>
+
+	// Global var for testing only, real data is going to come from server
+	var UGprefs = {
+			"Gourmande": 1,
+			"Espiegle": 0,
+			"Magique": 1,
+			"Trouble": 1,
+			"Machin": 1,
+			"Bidule": 0,
+			"Truc": 1,
+			"Oui": 0
+		};
+
+	/**
+	 * A function to update a specific preference in the localStorage
+	 * @param  {string} name  The name of the preference (also the label of the button)
+	 * @param  {boolean} val  The value
+	 */
+	function updatePreference(name, val) {
+		var s = JSON.parse(localStorage.getItem('ugprefs'));
+
+		(val) ? s[name] = 1 : s[name] = 0;
+
+		localStorage.setItem('ugprefs', JSON.stringify(s));
+	}
+
+	/**
+	 * Get a specific preference value
+	 * @param  {string} name  The name of the preference
+	 * @return {boolean}      The value
+	 */
+	function getPreference(name) {
+		var s = JSON.parse(localStorage.getItem('ugprefs'));
+
+		return parseInt(s[name]);
+	}
+
+	Polymer('ug-prefs', {
+		ready: function() {			
+		},
+		created: function() {
+			this.ugprefs = UGprefs || {};
+
+			// Check if the preferences exist in the localStorage, if not, create them.
+			if (!localStorage.getItem('ugprefs')) {
+				localStorage.setItem('ugprefs', JSON.stringify(this.ugprefs));
+			}
+		},
+		attached: function() {
+		},
+		domReady: function() {
+
+			var paperButtons = this.$.prefList.querySelectorAll('paper-radio-button');
+
+			for (var i = paperButtons.length - 1; i >= 0; i--) {
+
+				// Check all the radio buttons that need to be, according to localStorage
+				if (getPreference(paperButtons[i].label)) {
+					paperButtons[i].checked = true;
+				}
+
+				// Update localStorage on change of radio button
+				paperButtons[i].addEventListener('change', function() {
+					updatePreference(this.label, this.checked);
+				});
+			};
+		},
+		keys: function(o) {
+			return Object.keys(o);
+		}
+	});
+</script>
+</polymer-element>

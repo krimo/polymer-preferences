@@ -1,0 +1,21 @@
+{
+  "name": "UGPreferences",
+  "version": "0.1.0",
+  "authors": [
+    "krimo <krimo.hafsaoui@gmail.com>"
+  ],
+  "description": "A web component for urbangirl.fr - apply user preferences to displayed articles",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.3",
+    "paper-radio-button": "Polymer/paper-radio-button#~0.3.3"
+  }
+}
