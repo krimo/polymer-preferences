@@ -1,0 +1,33 @@
+:host {
+	display: block;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+ul {
+	margin: 0;
+	padding: 1em;
+	list-style-type: none;
+}
+
+li {
+	margin: 1em 0;
+}
+
+paper-radio-button::shadow #ink[checked] {
+	color: #ee145b;
+}
+
+paper-radio-button::shadow #onRadio {
+	background-color: #ee145b;
+}
+
+paper-radio-button::shadow #ink {
+	color: #b5b5b5;
+}
+
+paper-radio-button::shadow #offRadio {
+	border-color: #b5b5b5;
+}

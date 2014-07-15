@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- 1. Load platform support before any code that touches the DOM. -->
 	<script src="bower_components/platform/platform.js"></script>
-	<!-- 2. Load the component using an HTML Import -->
-	<link rel="import" href="elements/ug-prefs.html">
+	<link rel="import" href="bower_components/polymer/polymer.html">
 	<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+	<link rel="import" href="elements/ug-prefs.html">
+	<!-- build:css css/main.min.css -->
+	<link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
 </head>
 <body>
-	<!-- 3. Declare the element by its tag. -->
-	<ug-prefs></ug-prefs>
+	<div class="st-container">
+		<nav class="st-menu st-effect-1" id="menu-1">
+			<h1>Your Preferences</h1>
+			<ug-prefs></ug-prefs>
+		</nav>
+
+		<!-- content push wrapper -->
+		<div class="st-pusher">
+			<div class="st-content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, aspernatur at voluptatum cumque, consectetur, eveniet velit exercitationem sit ea modi asperiores aperiam. Eaque, eos. Impedit architecto veritatis praesentium, inventore magni!</p>
+
+				<button id="trigger">reveal</button>
+			</div><!-- /st-content -->
+		</div><!-- /st-pusher -->
+	</div>	
+
+	<!-- build:js js/main.min.js -->
+	<script src="js/classie.js"></script>
+	<script src="js/UgPreferences.js"></script>
+	<script src="js/init.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
