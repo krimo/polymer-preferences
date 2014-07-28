@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
-    minifyCss = require('gulp-minify-css');
+    minifyCss = require('gulp-minify-css'),
+    serve = require('gulp-serve');
 
 gulp.task('html', function () {
     return gulp.src('*.html')
@@ -14,5 +15,7 @@ gulp.task('html', function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('serve', serve('dist'));
+
 // Default Task
-gulp.task('default', ['html']);
+gulp.task('default', ['html', 'dist']);
