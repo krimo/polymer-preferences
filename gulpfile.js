@@ -3,7 +3,13 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     minifyCss = require('gulp-minify-css'),
-    serve = require('gulp-serve');
+    connect = require('gulp-connect');
+
+gulp.task('connect', function() {
+    connect.server({
+      livereload: true
+    });
+});
 
 gulp.task('html', function () {
     return gulp.src('*.html')
@@ -12,10 +18,12 @@ gulp.task('html', function () {
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(useref.restore())
         .pipe(useref())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(connect.reload());
 });
 
-gulp.task('serve', serve('dist'));
+gulp.task('watch', function () {
+  gulp.watch(['./app/*.html'], ['html']);
+});
 
-// Default Task
-gulp.task('default', ['html', 'dist']);
+gulp.task('default', ['connect', 'watch']);
